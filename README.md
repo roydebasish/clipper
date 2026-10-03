@@ -84,7 +84,7 @@ The application implements a decoupled, event-driven architecture bridging **mac
 +--------------------------|----------------------------------------------+
                            |
             Platform Channel Communication
-      (com.clipboardmanager/methods & /events)
+      (com.clipper/methods & /events)
                            |
                            v
 +-------------------------------------------------------------------------+
@@ -260,7 +260,7 @@ clipper/
 
 Communication between Swift and Flutter is conducted over two designated channels:
 
-### 1. Method Channel: `com.clipboardmanager/methods`
+### 1. Method Channel: `com.clipper/methods`
 
 | Method Name | Direction | Arguments | Return Type | Description |
 |---|---|---|---|---|
@@ -283,7 +283,7 @@ Communication between Swift and Flutter is conducted over two designated channel
 | `onItemDeletedFromMenuBar`| Swift -> Flutter | `String` (item ID) | `void` | Triggered when an item is deleted from the Menu Bar dropdown. |
 | `onGlobalShortcutTriggered`| Swift -> Flutter | None | `void` | Triggered when `⌘⇧V` is pressed system-wide. |
 
-### 2. Event Channel: `com.clipboardmanager/events`
+### 2. Event Channel: `com.clipper/events`
 
 * **Event Stream**: Broadcasts a dictionary payload whenever `ClipboardMonitor` detects a new pasteboard item:
   ```json
@@ -380,15 +380,15 @@ All application data is isolated within the sandboxed user Application Support d
 
 * **Clipboard Records**:
   ```
-  ~/Library/Application Support/com.clipboardmanager.clipboardManager/database/clipboard_history.json
+  ~/Library/Application Support/com.clipper.app/database/clipboard_history.json
   ```
 * **User Preferences**:
   ```
-  ~/Library/Application Support/com.clipboardmanager.clipboardManager/database/settings.json
+  ~/Library/Application Support/com.clipper.app/database/settings.json
   ```
 * **Persistent PNG Images**:
   ```
-  ~/Library/Application Support/com.clipboardmanager.clipboardManager/images/{UUID}.png
+  ~/Library/Application Support/com.clipper.app/images/{UUID}.png
   ```
 
 Data writes are atomic: content is committed via temporary buffers before renaming, preventing partial-write corruption during power interruptions or force-close events.

@@ -18,13 +18,13 @@ public class MacPlatformBridge: NSObject, FlutterStreamHandler, ClipboardMonitor
         self.mainWindow = window
 
         // Setup MethodChannel
-        methodChannel = FlutterMethodChannel(name: "com.clipboardmanager/methods", binaryMessenger: messenger)
+        methodChannel = FlutterMethodChannel(name: "com.clipper/methods", binaryMessenger: messenger)
         methodChannel?.setMethodCallHandler { [weak self] (call, result) in
             self?.handleMethodCall(call: call, result: result)
         }
 
         // Setup EventChannel
-        eventChannel = FlutterEventChannel(name: "com.clipboardmanager/events", binaryMessenger: messenger)
+        eventChannel = FlutterEventChannel(name: "com.clipper/events", binaryMessenger: messenger)
         eventChannel?.setStreamHandler(self)
 
         // Attach ClipboardMonitor delegate

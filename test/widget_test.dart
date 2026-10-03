@@ -6,7 +6,7 @@ void main() {
   testWidgets('ClipperApp smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(
       const ProviderScope(
-        child: ClipboardManagerApp(),
+        child: ClipperApp(),
       ),
     );
 

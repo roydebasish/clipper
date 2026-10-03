@@ -47,8 +47,8 @@ enum ClipboardType {
 }
 
 class AppConstants {
-  static const String methodChannelName = 'com.clipboardmanager/methods';
-  static const String eventChannelName = 'com.clipboardmanager/events';
+  static const String methodChannelName = 'com.clipper/methods';
+  static const String eventChannelName = 'com.clipper/events';
   
   static const String appName = 'Clipper';
 }

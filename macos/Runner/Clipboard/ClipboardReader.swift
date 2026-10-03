@@ -84,7 +84,7 @@ public class ClipboardReader {
                 // Save PNG to persistent images directory
                 var savedPath: String? = nil
                 if let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                    let imagesDir = appSupport.appendingPathComponent("com.clipboardmanager.clipboardManager/images", isDirectory: true)
+                    let imagesDir = appSupport.appendingPathComponent("\(Bundle.main.bundleIdentifier ?? "com.clipper.app")/images", isDirectory: true)
                     try? FileManager.default.createDirectory(at: imagesDir, withIntermediateDirectories: true, attributes: nil)
                     let fileUrl = imagesDir.appendingPathComponent("\(id).png")
                     do {

@@ -279,7 +279,7 @@ public class MenuBarManager: NSObject, NSMenuDelegate {
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
             return []
         }
-        let dbUrl = appSupport.appendingPathComponent("com.clipboardmanager.clipboardManager/database/clipboard_history.json")
+        let dbUrl = appSupport.appendingPathComponent("\(Bundle.main.bundleIdentifier ?? "com.clipper.app")/database/clipboard_history.json")
         guard let data = try? Data(contentsOf: dbUrl),
               let json = (try? JSONSerialization.jsonObject(with: data)) as? [[String: Any]] else {
             return []
@@ -289,7 +289,7 @@ public class MenuBarManager: NSObject, NSMenuDelegate {
 
     private func deleteItemFromDisk(id: String) {
         guard let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return }
-        let dbUrl = appSupport.appendingPathComponent("com.clipboardmanager.clipboardManager/database/clipboard_history.json")
+        let dbUrl = appSupport.appendingPathComponent("\(Bundle.main.bundleIdentifier ?? "com.clipper.app")/database/clipboard_history.json")
         guard let data = try? Data(contentsOf: dbUrl),
               var json = (try? JSONSerialization.jsonObject(with: data)) as? [[String: Any]] else { return }
 

@@ -8,13 +8,13 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     const ProviderScope(
-      child: ClipboardManagerApp(),
+      child: ClipperApp(),
     ),
   );
 }
 
-class ClipboardManagerApp extends ConsumerWidget {
-  const ClipboardManagerApp({super.key});
+class ClipperApp extends ConsumerWidget {
+  const ClipperApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
