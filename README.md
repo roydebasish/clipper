@@ -1,4 +1,4 @@
-# Clipper - macOS Unified Clipboard Manager
+# Clipper - Native macOS Clipboard Manager
 
 [![Platform](https://img.shields.io/badge/Platform-macOS%2012.0%2B-blue?logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x%20%7C%20Dart%203.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
@@ -43,7 +43,7 @@
 
 ## Executive Summary
 
-Standard operating system clipboards are volatile and single-occupancy: copying new data irrevocably overwrites preceding content. The **macOS Unified Clipboard Manager** transforms the system pasteboard into a structured, searchable, and persistent productivity engine.
+Standard operating system clipboards are volatile and single-occupancy: copying new data irrevocably overwrites preceding content. **Clipper** transforms the macOS system pasteboard into a structured, searchable, and persistent productivity engine.
 
 ### Core Value Propositions:
 * **Zero-Latency Monitoring**: Lightweight polling of `NSPasteboard.general.changeCount` with self-write suppression guarantees negligible CPU overhead (<0.01% idle utilization).
@@ -114,7 +114,7 @@ The application implements a decoupled, event-driven architecture bridging **mac
 
 Located in `macos/Runner/`:
 
-* **`ClipboardMonitor.swift`**: Polls `NSPasteboard.general.changeCount` at 250ms intervals. Employs a self-write suppression mechanism (`notifySelfWrite`) to prevent feedback loops when the manager re-copies historical records back to the clipboard.
+* **`ClipboardMonitor.swift`**: Polls `NSPasteboard.general.changeCount` at 250ms intervals. Employs a self-write suppression mechanism (`notifySelfWrite`) to prevent feedback loops when Clipper re-copies historical records back to the clipboard.
 * **`ClipboardReader.swift`**: Extracts data types in prioritized sequence:
   1. `[NSURL]` file arrays (with auto-detection of single image files).
   2. `NSImage` via `tiffRepresentation` -> `NSBitmapImageRep` conversion to standard PNG. Saves full-resolution images to the application support sandbox and attaches base64 thumbnails for instant in-memory rendering.
@@ -196,7 +196,7 @@ Directly transform any copied text snippet without pasting into an external edit
 ## Project Directory Layout
 
 ```text
-clipboard_manager/
+clipper/
 ├── lib/
 │   ├── main.dart                                    # Application entrypoint & ProviderScope
 │   ├── core/
@@ -306,7 +306,7 @@ Communication between Swift and Flutter is conducted over two designated channel
 
 | Shortcut | Scope | Action |
 |---|---|---|
-| `⌘⇧V` (Command + Shift + V) | Global (System-wide) | Toggle Clipboard Manager window |
+| `⌘⇧V` (Command + Shift + V) | Global (System-wide) | Toggle Clipper window |
 | `1` – `9` | Menu Bar Dropdown | Instantly copy items 1 through 9 |
 | `⌥` (Hold Option) | Menu Bar Dropdown | Dynamically switch items to Delete mode |
 | `Single Click` | In-App Tile / Menu Bar | Instantly copy item to clipboard |
@@ -333,8 +333,8 @@ Communication between Swift and Flutter is conducted over two designated channel
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/clipboard_manager.git
-   cd clipboard_manager
+   git clone https://github.com/your-username/clipper.git
+   cd clipper
    ```
 
 2. **Install Flutter dependencies**:
@@ -364,12 +364,12 @@ flutter build macos --release
 
 The resulting executable will be located at:
 ```
-build/macos/Build/Products/Release/clipboard_manager.app
+build/macos/Build/Products/Release/Clipper.app
 ```
 
 To run the release bundle directly:
 ```bash
-open "build/macos/Build/Products/Release/clipboard_manager.app"
+open "build/macos/Build/Products/Release/Clipper.app"
 ```
 
 ---
@@ -398,7 +398,7 @@ Data writes are atomic: content is committed via temporary buffers before renami
 ## Security, Privacy & Sandboxing
 
 * **Local-First Processing**: No network client or socket is initialized. The application functions completely offline.
-* **Zero Loopback Vulnerability**: Custom `changeCount` tracking ensures the manager never re-records its own write actions.
+* **Zero Loopback Vulnerability**: Custom `changeCount` tracking ensures Clipper never re-records its own write actions.
 * **Password Manager Protection**: Built-in support to exclude standard password management software (`com.agilebits.onepassword`, `com.bitwarden.desktop`, etc.).
 * **Entitlements**: Uses minimum necessary macOS entitlements for pasteboard monitoring and file access within its container.
 
