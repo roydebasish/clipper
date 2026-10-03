@@ -333,7 +333,7 @@ Communication between Swift and Flutter is conducted over two designated channel
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/clipper.git
+   git clone https://github.com/roydebasish/clipper.git
    cd clipper
    ```
 
